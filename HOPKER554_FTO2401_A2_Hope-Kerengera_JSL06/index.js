@@ -7,46 +7,89 @@ const menu = {
 
 // Function to display menu items by category
 function displayMenuItems(menu) {
-    // Get the menu container element from the HTML
+    const menuContainer = document.getElementById("menu");
+    // Get the menu container element from the HTML DONE
+    const dishes = Object.entries(menu); //turn into array
+    const newDishes = dishes.map(([category, meal]) => { //create a copy of array and iterate through it
+        return {category, meal}; //returns object
+    })
 
-    // Loop through each category and its items in the menu object
+    newDishes.forEach( dish => { //for each dish in newDishes object:
+        const categoryName = document.createElement("h1");
+        categoryName.textContent = `${dish.category}`; //"category name" will equal either starter, main course or dessert
+        menuContainer.appendChild(categoryName); //append to menu section
+        const menuList = document.createElement("ul"); 
 
-        // Create an element to represent the category
 
-        // Set the text content of the category element to the category name
+        dish.meal.forEach( listItem => { //listItem is the value of the array meal items 
+            const list = document.createElement("li");
+            list.textContent = `${listItem}`; //list = dish.meal = listItem. (this function is defined within newDishes function which has dish as a value)
+            menuList.appendChild(list);
+            menuContainer.appendChild(menuList);
 
-        // Append the category element to the menu container
+            list.addEventListener("click", () => {// when list item clicked, addToOrder will run where item will be added to order and total price updated
+                addToOrder(listItem); //callback function. "itemName" is parameter and in this case = listItem
+            })
+        })
 
-        // Create an element to represent a list of items
+    })
 
-        // Append a list of items element to the menu container
 
-        // Loop through the items in the category and create list items
+    // Loop through each category and its items in the menu object DONE
 
-            // Create a list item element
+        // Create an element to represent the category DONE
 
-            // Set the text content of the list item element to the item name
+        // Set the text content of the category element to the category name DONE
 
-            // Attach a click event listener to the list item to add it to the order
+        // Append the category element to the menu container DONE
 
-            // Append the list item to the list of items
+        // Create an element to represent a list of items DONE
+
+        // Append a list of items element to the menu container DONE
+
+        // Loop through the items in the category and create list items DONE
+
+            // Create a list item element DONE
+
+            // Set the text content of the list item element to the item name DONE
+
+            // Attach a click event listener to the list item to add it to the order DONE
+
+            // Append the list item to the list of items DONE
 
             
 }
 
+displayMenuItems(menu);
+
 // Callback function for adding an item to the order
-function addToOrder(itemName) {
-    // Get the order items list and the order total element from the HTML
 
-    // Create a list item for the order
+let totalPrice = 0; //"let" so that the amounts are updated each time
 
-    // Set the text content of the list item to the item name
+function addToOrder(itemName) { //item name will be list item user clicks
 
-    // Append the list item to the order items list
+    const orderItems = document.getElementById("order-items"); //main list
+    const orderTotal = document.getElementById("order-total"); //grabbing order total span
 
-    // Calculate and update the total price
+    const listOrder = document.createElement("ul"); //create ordered meal list within main list
+    const listOrderItem = document.createElement("li"); //list items
+    listOrderItem.textContent = itemName; // order item will be what user clicks
+    listOrder.appendChild(listOrderItem);
+    orderItems.appendChild(listOrder); // append ordered meal list to main list
+    totalPrice += 60; // increment the total price by 60 each time
+    orderTotal.textContent = `${totalPrice.toFixed(2)}`; //order total content = total price to two decimal places
 
-    // Update the text content of the order total element with the new total
+    // Get the order items list and the order total element from the HTML DONE
+
+    // Create a list item for the order DONE
+
+    // Set the text content of the list item to the item name DONE
+
+    // Append the list item to the order items list DONE
+
+    // Calculate and update the total price DONE
+
+    // Update the text content of the order total element with the new total DONE
 }
 
 // Function to initialize the menu system
