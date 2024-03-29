@@ -16,6 +16,7 @@ function displayMenuItems(menu) {
 
     newDishes.forEach( dish => { //for each dish in newDishes object:
         const categoryName = document.createElement("h1");
+        categoryName.className = "categoryName";
         categoryName.textContent = `${dish.category}`; //"category name" will equal either starter, main course or dessert
         menuContainer.appendChild(categoryName); //append to menu section
         const menuList = document.createElement("ul"); 
@@ -90,6 +91,12 @@ function addToOrder(itemName) { //item name will be list item user clicks
     // Calculate and update the total price DONE
 
     // Update the text content of the order total element with the new total DONE
+    const clear = document.getElementById("buttonClear"); //clear order button
+    clear.addEventListener("click", () => {
+        orderItems.innerHTML = ""; // clear the order items list
+        totalPrice = 0; // total price back to zero
+        orderTotal.textContent = "0.00";
+    })
 }
 
 // Function to initialize the menu system
